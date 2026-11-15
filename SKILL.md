@@ -1,6 +1,6 @@
 ---
 name: public-suffix-list
-description: Use when working with the Public Suffix List (PSL) — evaluating or submitting entries, advising multi-tenant platforms with per-user subdomains — or when a session touches eTLD+1 / registrable-domain logic - cookie Domain scoping, SameSite, site isolation, storage partitioning, wildcard certificates on shared suffixes, or hand-rolled hostname parsing (splitting on dots, hardcoded TLD lists).
+description: Use when working with the Public Suffix List (PSL) — evaluating or submitting entries (including whether a platform is ready to submit at all), advising multi-tenant platforms with per-user subdomains — or when a session touches eTLD+1 / registrable-domain logic - cookie Domain scoping, SameSite, site isolation, storage partitioning, wildcard certificates on shared suffixes, or hand-rolled hostname parsing (splitting on dots, hardcoded TLD lists).
 ---
 
 # Public Suffix List (PSL)
@@ -56,4 +56,8 @@ Computing a "root domain" by splitting on dots or a hardcoded TLD list is always
 
 ## Advising multi-tenant platforms
 
-Per-user-subdomain platforms without a PSL entry share one identity across all tenants: one cookie/SameSite boundary, one storage partition key, one site-isolation site, one autofill scope, one LE rate-limit bucket, one Search Console property scope. A PRIVATE-section entry separates all of these while leaving the platform's own wildcard cert untouched. Submission is a PR to github.com/publicsuffix/list (guidelines in the repo; expect DNS `_psl` TXT validation and maintainer discretion; entry shape may be wildcard-only, e.g. `*.platform.example`).
+Per-user-subdomain platforms without a PSL entry share one identity across all tenants: one cookie/SameSite boundary, one storage partition key, one site-isolation site, one autofill scope, one LE rate-limit bucket, one Search Console property scope. A PRIVATE-section entry separates all of these while leaving the platform's own wildcard cert untouched.
+
+**Benefit is not eligibility.** Before recommending a submission, apply [references/submission-readiness.md](references/submission-readiness.md). The [Guidelines](https://raw.githubusercontent.com/wiki/publicsuffix/list/Guidelines.md) decline projects that are smaller in scale, temporary, private-use, sandbox, test, lab, beta, or exploratory, and projects not serving more than thousands of users. A platform that is pre-launch, in beta or invite-only, or serving fewer than about 1,000 current users on the suffix gets **Defer** with interim controls (host-only `__Host-` cookies, dashboard on a separate registrable domain), not a pull request. Third-party effects such as the LE rate-limit bucket are side effects; a request whose objective is a third-party limit is declined.
+
+Only when the readiness gate and every hard blocker pass: submit a PR to github.com/publicsuffix/list using `.github/pull_request_template.md` unaltered, from the domain owner or an authorized representative, with a role-based contact, an abuse contact reachable from the suffix, and more than two years of registration remaining. Expect DNS `_psl` TXT validation and maintainer discretion. Entry shape may be wildcard-only, e.g. `*.platform.example`, when tenants nest below their own label.

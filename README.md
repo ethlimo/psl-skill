@@ -12,6 +12,7 @@ With this skill loaded, the same scenario produces the correct answer: Let's Enc
 
 - **`SKILL.md`** — the operating guidance: the ICANN-vs-PRIVATE section distinction, which browser mechanisms honor a PRIVATE entry (`INCLUDE_PRIVATE_REGISTRIES` vs `EXCLUDE` per Chromium call site), the wildcard-certificate misconception and its counters, myths not to repeat, code-review guidance for registrable-domain logic, and advice for multi-tenant platforms.
 - **`references/use-cases.md`** — 24 verified PSL use cases, each cited to a primary source (RFCs, WHATWG/W3C spec anchors, Chromium/Gecko/Boulder source with function names, first-party vendor docs), plus a list of widely repeated claims that did **not** survive verification.
+- **`references/submission-readiness.md`** — when a PSL pull request is appropriate: the Guidelines' readiness gate (live, public, already serving thousands of users on the suffix) and the hard blockers to check before submitting. A platform that would benefit from listing is not necessarily eligible; the skill recommends deferral and interim controls until it is.
 
 Every factual claim was verified against primary sources on 2026-09-01: specs at their canonical URLs, browser source at `main` (source.chromium.org, searchfox.org), Boulder source, live TLS handshakes, and crt.sh. No secondary sources.
 
